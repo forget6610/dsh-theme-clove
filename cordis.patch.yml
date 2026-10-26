@@ -1,0 +1,9 @@
+# 插件行清单。安装进 profile 后由 bundle 层读取并挂载。
+#   id   任意，仅用于在 cordis 树里标识这一行
+#   name 必须等于 package.json 的 name
+#
+# 宿主半区 = 包 main（host.js）：壁纸与角色素材路由
+# 浏览器半区 = ./client 导出（client.js）：token 覆盖、CSS、右下角角色
+- insert:
+    - id: clove-theme
+      name: dsh-theme-clove

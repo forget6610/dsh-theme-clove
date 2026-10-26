@@ -1,0 +1,8 @@
+# 个人素材不放仓库
+assets/wallpaper.jpg
+assets/mascot.png
+assets/mascot-source.png
+
+node_modules/
+*.log
+.DS_Store
