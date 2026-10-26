@@ -16,18 +16,23 @@
 
 ## 安装
 
-```
-dsh plugin --profile web-desktop add github:<你的用户名>/dsh-theme-clove
-```
-
-或者本地开发：
+命令行版（`dsh web`）：
 
 ```
-git clone https://github.com/<你的用户名>/dsh-theme-clove
-dsh plugin --profile web-desktop add link:D:\path\to\dsh-theme-clove
+dsh plugin --profile web add github:forget6610/dsh-theme-clove
+dsh web
 ```
 
-装完重启客户端（或 `dsh web`）并强刷页面。卸载用 `dsh plugin --profile web-desktop remove dsh-theme-clove`。
+桌面客户端（DSH Desktop / EAC）：`dsh plugin` 不允许操作客户端自带的 `desktop` profile，请在 **设置 → 插件 → 市场** 里从 GitHub 源搜索 `dsh-theme-clove` 安装，装完重启客户端并 `Ctrl+F5`。
+
+本地开发：
+
+```
+git clone https://github.com/forget6610/dsh-theme-clove
+dsh plugin --profile web add link:D:\path\to\dsh-theme-clove
+```
+
+卸载：命令行 `dsh plugin --profile web remove dsh-theme-clove`，客户端在插件市场里卸载。
 
 ## 换成自己的图
 
