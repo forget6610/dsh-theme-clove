@@ -190,42 +190,14 @@ assert.equal(Object.keys(ctx.__tokens).length, 33, 'token 数量与预期不符'
 assert.equal(document.documentElement.attrs['data-clove-theme'], 'on');
 assert.ok(document.head.children.some((el) => el.id === 'dsh-clove-theme'), '缺少样式标签');
 
-const mascot = document.querySelector('.dsh-clove-mascot');
-assert.ok(mascot, '角色没有被挂载');
-const nodes = [];
-walk(mascot, (node) => nodes.push(node));
-const btn = nodes.find((n) => n.classList.contains('dsh-clove-btn'));
-const bubble = nodes.find((n) => n.classList.contains('dsh-clove-bubble'));
-const glow = nodes.find((n) => n.classList.contains('dsh-clove-glow'));
-const img = nodes.find((n) => n.classList.contains('dsh-clove-img'));
-assert.ok(btn && bubble && glow && img, '角色 DOM 结构不完整');
-assert.equal(img.attrs['src'], '/dsh-clove-bg/mascot.png', '角色图路径不对');
-assert.equal(img.tagName, 'img');
-assert.ok(btn.attrs['aria-label'], '缺少无障碍标签');
-
-assert.ok(timeouts.size > 0, '缺少待触发的动画/台词定时器');
-assert.ok(windowListeners.get('mousemove')?.length === 1, '缺少鼠标视差监听');
-
-// 视差
-windowListeners.get('mousemove')[0]({ clientX: 1440, clientY: 900 });
-assert.equal(rafs.size, 1, '视差未走 requestAnimationFrame');
-[...rafs.values()][0]();
-assert.ok(mascot.style.getPropertyValue('--clove-px').endsWith('px'), '视差变量未写入');
-assert.ok(mascot.style.getPropertyValue('--clove-py').endsWith('px'), '视差变量未写入');
-
-// 点击：跳跃 + 气泡
-btn.dispatch('click');
-assert.ok(bubble.classList.contains('is-visible'), '气泡未显示');
-assert.ok(bubble.textContent.length > 0, '气泡没有台词');
-assert.ok(mascot.classList.contains('is-hop'), '点击未触发跳跃动画');
+const styleEl = document.head.children.find((el) => el.id === 'dsh-clove-theme');
+assert.ok(styleEl.textContent.includes('/dsh-clove-bg/wallpaper.jpg'), '缺少壁纸路径');
+assert.ok(!document.querySelector('.dsh-clove-mascot'), '主题不应该再挂角色，角色交给桌宠插件');
 
 disposers.forEach((fn) => fn());
 
 assert.equal(ctx.__tokenDisposed, true, 'token 未回收');
-assert.equal(document.querySelector('.dsh-clove-mascot'), null, '角色 DOM 未移除');
 assert.ok(!document.head.children.some((el) => el.id === 'dsh-clove-theme'), '样式标签未移除');
-assert.equal(timeouts.size, 0, '定时器未清理');
-assert.equal(windowListeners.get('mousemove')?.length ?? 0, 0, '鼠标监听未移除');
 assert.equal(document.documentElement.attrs['data-clove-theme'], undefined, '根属性未移除');
 
-console.log('smoke ok: bundle / tokens(33) / CSS / img mascot / click bubble / parallax / cleanup');
+console.log('smoke ok: bundle / tokens(33) / skin CSS / cleanup');

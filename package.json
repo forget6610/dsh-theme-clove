@@ -1,6 +1,6 @@
 {
   "name": "dsh-theme-clove",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dusk-coloured theme plugin for the DeepSeek Harness web GUI: design tokens, wallpaper and a floating mascot. Ships neutral placeholder art, bring your own.",
   "type": "module",
   "license": "MIT",
